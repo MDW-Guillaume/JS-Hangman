@@ -7,20 +7,38 @@ const provider = new Provider();
 inputSystem.init()
 
 const oneWord = provider.getOneWord()
+let wordArray = new Array(oneWord.length).fill('_');
 
-function generateCompletionArray(oneWord){
+const enteriesContainer = document.getElementById('enteries');
 
-    let wordArray = new Array(oneWord.length).fill('_');
+function handleKeyEvent(event) {
+    if (!oneWord.includes(event.key)){
+        return;
+    }
 
-    let enteriesContainer = document.getElementById('enteries');
+    for (let index = 0; index < oneWord.length; index++) {
+        if (oneWord[index] === event.key) {
+          wordArray[index] = event.key;
+        }
+    }
 
-    // Crée les éléments div avec la classe "enteries__element" et le contenu '<span>_</span>'
+    renderArray(wordArray);
+}
+
+function renderArray(wordArray){
+    let remode = document.querySelectorAll('.enteries__element');
+
+    remode.forEach((el) => {
+        el.remove();
+    })
+
+
     for (let i = 0; i < wordArray.length; i++) {
         const elementDiv = document.createElement('div');
         elementDiv.classList.add('enteries__element');
     
         const spanElement = document.createElement('span');
-        spanElement.textContent = '_';
+        spanElement.textContent = wordArray[i].toUpperCase();
     
         elementDiv.appendChild(spanElement);
         enteriesContainer.appendChild(elementDiv);
@@ -29,5 +47,12 @@ function generateCompletionArray(oneWord){
     return wordArray;
 }
 
+setInterval(() => {
+    inputSystem.getCurrentQueue().forEach((event) => {
+        inputSystem.removeFromQueue(event);
+        handleKeyEvent(event);
+    })
+}, 300)
+
 console.log(oneWord)
-generateCompletionArray(oneWord)
+renderArray(wordArray)

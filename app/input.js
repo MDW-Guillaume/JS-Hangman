@@ -1,6 +1,9 @@
 class Input {
+    eventQueue = [];
+
     init(){
         document.addEventListener('keydown', (event) => this.handleKeyDown(event));
+        this.eventQueue = [];
     }
 
     handleKeyDown(event){
@@ -8,10 +11,19 @@ class Input {
             return;
         }
 
-        console.log('good key');
+        this.eventQueue.push(event);
+    }
+
+    getCurrentQueue() {
+        return this.eventQueue;
+    }
+
+    removeFromQueue(event) {
+        let index = this.eventQueue.indexOf(event); 
+        this.eventQueue.pop(index);
     }
 }
 
-const arrayKey = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+const arrayKey = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "é"];
 
 export default Input
