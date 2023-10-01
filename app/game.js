@@ -10,6 +10,7 @@ export default class Game {
         this.scoreSystem = new Score();
 
         this.inputSystem.init();
+        this.scoreSystem.init();
 
         this.currentWord = this.provider.getOneWord()
         this.wordArray = new Array(this.currentWord.length).fill('_')

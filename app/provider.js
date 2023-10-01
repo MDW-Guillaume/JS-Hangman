@@ -7,4 +7,14 @@ export default class Provider{
         
         return word;
     }
+
+    getWordWithMaxLength(length) {
+        let word;
+        do {
+            word = this.getOneWord();    
+
+        } while (word.length > length)
+            
+        return word;
+    }
 }

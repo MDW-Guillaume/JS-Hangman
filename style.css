@@ -26,3 +26,28 @@ h1{
 .score {
     margin-bottom: 20px;
 }
+
+.difficulties {
+    display: flex;
+    justify-content: space-evenly;
+    width: 30%;
+    margin: 25px auto;
+}
+
+.difficulty {
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.easy {
+    background-color: green;
+}
+
+.medium {
+    background-color: orange;
+}
+
+.hard {
+    background-color: red;
+}

@@ -6,6 +6,19 @@ export default class Score {
         this.showScore();
     }
 
+    init() {
+        this.difficultyMap = {}
+
+        document.querySelectorAll('.difficulty').forEach((el) => {
+            this.difficultyMap[el.innerText] = el.getAttribute('value');
+            el.addEventListener('click', (event) => {
+                this.difficultyMap = event.target.value;
+            })
+        });
+
+        console.log(this.difficultyMap);
+    }
+
     getScore() {
         return this.score;
     }
