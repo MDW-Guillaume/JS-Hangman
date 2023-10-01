@@ -1,18 +1,19 @@
 import Input from './input.js';
 import Provider from './provider.js';
+import Score from './score.js';
 
 export default class Game {
     init() {
         this.inputSystem = new Input();
         this.provider = new Provider();
         this.enteriesContainer = document.getElementById('enteries');
-        this.inputSystem.init()
+        this.scoreSystem = new Score();
+
+        this.inputSystem.init();
 
         this.currentWord = this.provider.getOneWord()
         this.wordArray = new Array(this.currentWord.length).fill('_')
         this.renderArray(this.wordArray);
-
-        console.log(this.currentWord);
 
         setInterval(() => {
             this.inputSystem.getCurrentQueue().forEach((event) => {
@@ -31,6 +32,10 @@ export default class Game {
             if (this.currentWord[index] === event.key) {
               this.wordArray[index] = event.key;
             }
+        }
+
+        if (!this.wordArray.includes('_')) {
+            return this.finishRound()
         }
     
         this.renderArray(this.wordArray);
@@ -55,5 +60,13 @@ export default class Game {
         }
         
         return wordArray;
+    }
+
+    finishRound() {
+        this.currentWord = this.provider.getOneWord();
+        this.scoreSystem.updateScore();
+
+        this.wordArray = new Array(this.currentWord.length).fill('_');
+        this.renderArray(this.wordArray);
     }
 }

@@ -22,3 +22,7 @@ h1{
     padding: 20px 10px 0 10px;
     background-color: yellow;
 }
+
+.score {
+    margin-bottom: 20px;
+}
