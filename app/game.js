@@ -1,13 +1,16 @@
 import Input from './input.js';
 import Provider from './provider.js';
 import Score from './score.js';
+import Leaderboard from './leaderboard.js';
 
 export default class Game {
     init() {
         this.inputSystem = new Input();
         this.provider = new Provider();
-        this.enteriesContainer = document.getElementById('enteries');
         this.scoreSystem = new Score();
+        this.leaderboard = new Leaderboard();
+
+        this.enteriesContainer = document.getElementById('enteries');
 
         this.inputSystem.init();
         this.scoreSystem.init();
@@ -67,7 +70,29 @@ export default class Game {
         this.currentWord = this.provider.getOneWord();
         this.scoreSystem.updateScore();
 
+        this.leaderboard.addScore(this.scoreSystem.getScore(), this.getCurrentPlayer());
+
         this.wordArray = new Array(this.currentWord.length).fill('_');
         this.renderArray(this.wordArray);
+    }
+
+    getCurrentPlayer() {
+        if (this.currentPlayer) {
+            return this.currentPlayer;
+        }
+
+        this.currentPlayer = '!Change Me!';
+
+        return this.currentPlayer;
+
+        //TODO 
+
+        this.currentPlayer = window.prompt('Entrez votre nom : ');
+        
+        if (this.currentPlayer.split === "") {
+            this.getCurrentPlayer();
+        }
+
+        return this.currentPlayer;
     }
 }

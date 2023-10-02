@@ -35,4 +35,9 @@ export default class Score {
         this.incrementScore();
         this.showScore();
     }
+
+    resetScore() {
+        this.score = 0;
+        this.showScore();
+    }
 }
