@@ -17,6 +17,7 @@ export default class Game {
 
         this.currentWord = this.provider.getOneWord()
         this.wordArray = new Array(this.currentWord.length).fill('_')
+        this.leaderboard.renderLeaderboard();
         this.renderArray(this.wordArray);
 
         setInterval(() => {

@@ -51,3 +51,25 @@ h1{
 .hard {
     background-color: red;
 }
+
+.leaderboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.leaderboard h3{
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+.leaderboard h3::after {
+    content: " :";
+}
+
+table, thead,  th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 15px 20px;
+}
