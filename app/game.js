@@ -78,22 +78,17 @@ export default class Game {
     }
 
     getCurrentPlayer() {
-        if (this.currentPlayer) {
+        if (this.currentPlayer && this.currentPlayer !== '') {
             return this.currentPlayer;
         }
 
-        this.currentPlayer = '!Change Me!';
-
-        return this.currentPlayer;
-
-        //TODO 
-
         this.currentPlayer = window.prompt('Entrez votre nom : ');
         
-        if (this.currentPlayer.split === "") {
+        if (this.currentPlayer.trim() === "") {
             this.getCurrentPlayer();
         }
 
         return this.currentPlayer;
+        
     }
 }
