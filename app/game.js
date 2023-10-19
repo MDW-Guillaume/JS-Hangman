@@ -73,6 +73,8 @@ export default class Game {
 
         this.leaderboard.addScore(this.scoreSystem.getScore(), this.getCurrentPlayer());
 
+        this.leaderboard.renderLeaderboard()
+
         this.wordArray = new Array(this.currentWord.length).fill('_');
         this.renderArray(this.wordArray);
     }
@@ -89,6 +91,5 @@ export default class Game {
         }
 
         return this.currentPlayer;
-        
     }
 }
