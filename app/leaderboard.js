@@ -12,7 +12,11 @@ export default class Leaderboard {
     }
 
     addScore(score, playerName) {
-        this.leaderboard[playerName] = score;
+        this.leaderboard = this.leaderboard.filter((scores) => 
+            scores.playerName !== playerName
+        );
+
+        this.leaderboard.push({playerName, score});
         this.manager.setLeaderboard(this.leaderboard);
     }
     
@@ -26,7 +30,7 @@ export default class Leaderboard {
 
         let placement = 1;
 
-        Object.entries(this.leaderboard).sort().forEach((infos) => {
+       this.leaderboard.forEach((infos) => {
             const elementDiv = document.createElement('tr');
             elementDiv.classList.add('leaderboard__element');
         
@@ -34,10 +38,10 @@ export default class Leaderboard {
             spanElement.textContent = placement;
 
             const spanElement2 = document.createElement('td');
-            spanElement2.textContent = infos[0];
+            spanElement2.textContent = infos.playerName;
         
             const spanElement3 = document.createElement('td');
-            spanElement3.textContent = infos[1];
+            spanElement3.textContent = infos.score;
         
             elementDiv.appendChild(spanElement);
             elementDiv.appendChild(spanElement2);
@@ -49,12 +53,6 @@ export default class Leaderboard {
     }
 
     sortLeaderboard(){
-        const sorted = Object.entries(this.leaderboard).sort((a, b) => b[1] - a[1]);
-
-        this.leaderboard = {};
-
-        sorted.forEach((infos) => {
-            this.leaderboard[infos[0]] = infos[1];
-        })
+        return this.leaderboard.sort((a, b) => b.score - a.score)
     }
 }

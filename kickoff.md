@@ -1,14 +1,11 @@
 # Kick-off
 
-- Points
-
 ## Specs
 
 - Système de score
 - Leaderboard
 - Trouver un mot
 - Générer un mot
-- Ecran fin de jeu
 - Pendu 
 - Afficher les lettres correctement tapées
 - Difficulté changeable
@@ -16,8 +13,19 @@
 ## Class
 
 - Game
+    - 
+    - Lancement de partie
+    - Fin de partie
+    - Demande du nom du joueur
+
 - Leaderboard
+    - 
+    - Ajout des scores
+    - Tri des scores
+    - Affichage des scores  
+
 - Providers
+    - 
 ```js
 class Provider {
     getWord(){}
@@ -26,3 +34,7 @@ class Provider {
 }
 ```
 
+- Input
+    - 
+    - Détecte l'ajout d'une lettre
+    - Filtre en fonction des lettres déja entrée

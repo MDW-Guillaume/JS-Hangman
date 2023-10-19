@@ -2,7 +2,7 @@ class LeaderboardManager {
     static leaderboardKey = 'leaderboard';
 
     getLeaderboard() {
-        return JSON.parse(localStorage.getItem(LeaderboardManager.leaderboardKey)) ?? {};
+        return JSON.parse(localStorage.getItem(LeaderboardManager.leaderboardKey)) ?? [];
     }
 
     setLeaderboard(leaderboard) {
