@@ -24,10 +24,26 @@ export default class Score {
     }
 
     incrementScore() {
-        this.score ++;
+        let level = localStorage.getItem('difficulty');
+        switch (level) {
+            case '1':
+                this.score++;
+                break;
+            case '2':
+                this.score += 2;
+                break;
+            case '3':
+                this.score += 3;
+                break;
+
+            default:
+                break;
+        }
+
     }
 
     showScore() {
+        console.log(this.score);
         this.scoreContainer.textContent = this.score;
     }
 
