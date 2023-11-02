@@ -6,10 +6,10 @@ export default class Provider{
 
         if(!level){
             word = basicWords[Math.floor((Math.random() * basicWords.length) + 1)];
-            console.log(word);
+            // console.log(word);
         }else{
             word = basicWords[Math.floor((Math.random() * basicWords.length) + 1)];
-            console.log(word)
+            // console.log(word)
         }
         
         return word;

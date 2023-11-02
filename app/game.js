@@ -15,18 +15,19 @@ export default class Game {
         this.inputSystem.init();
         this.scoreSystem.init();
 
+        this.life = 11;
+
         let level = this.difficulty.getDifficulty() != 0 ? this.difficulty.getDifficulty() : 1;
 
 
         this.difficulty.setDifficulty(level);
         this.launchRound();
-        // this.currentWord = this.provider.getWordWithMaxLength(level)
-        // this.currentWord = this.provider.getOneWord(level)
-        // this.wordArray = new Array(this.currentWord.length).fill('_')
-        this.leaderboard.renderLeaderboard();
-        // this.renderArray(this.wordArray);
 
-        this.chooseDifficulty()
+        this.leaderboard.renderLeaderboard();
+
+        this.updateImage();
+
+        this.chooseDifficulty();
 
         setInterval(() => {
             this.inputSystem.getCurrentQueue().forEach((event) => {
@@ -38,6 +39,19 @@ export default class Game {
 
     handleKeyEvent(event) {
         if (!this.currentWord.includes(event.key)) {
+            console.log('faux', this.life);
+            this.life -= 1;
+            console.log(this.life);
+
+            this.updateImage();
+
+            if(this.life == 0){
+                console.log('fin');
+                this.loseRound();
+            }
+
+            // Stocker la lettre quelque part
+
             return;
         }
 
@@ -80,8 +94,12 @@ export default class Game {
         let level = this.difficulty.getDifficulty();
         this.currentWord = this.provider.getWordWithMaxLength(level);
         this.wordArray = new Array(this.currentWord.length).fill('_');
-        console.log('la', this.currentWord, this.wordArray)
+        console.log(this.currentWord, this.wordArray)
         this.renderArray(this.wordArray);
+        
+        this.life = 11;
+        this.updateImage();
+
     }
 
     finishRound() {
@@ -91,6 +109,11 @@ export default class Game {
 
         this.leaderboard.renderLeaderboard()
 
+        this.launchRound();
+    }
+
+    loseRound(){
+        alert('Pendu !');
         this.launchRound();
     }
 
@@ -126,5 +149,26 @@ export default class Game {
         }, 300);
 
         return;
+    }
+
+    updateImage(){
+        let lifeArray = [
+            'life-0',
+            'life-1',
+            'life-2',
+            'life-3',
+            'life-4',
+            'life-5',
+            'life-6',
+            'life-7',
+            'life-8',
+            'life-9',
+            'life-10',
+            'start',
+        ];
+
+        let imageContent = document.getElementById('imagePendu')
+        console.log(this.life, lifeArray[this.life]);
+        imageContent.src = 'assets/' + lifeArray[this.life] + '.png';
     }
 }

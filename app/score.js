@@ -15,8 +15,6 @@ export default class Score {
                 this.difficultyMap = event.target.value;
             })
         });
-
-        console.log(this.difficultyMap);
     }
 
     getScore() {
@@ -43,7 +41,6 @@ export default class Score {
     }
 
     showScore() {
-        console.log(this.score);
         this.scoreContainer.textContent = this.score;
     }
 
