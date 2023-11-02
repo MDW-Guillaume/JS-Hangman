@@ -52,7 +52,7 @@ export default class Leaderboard {
         })
     }
 
-    sortLeaderboard(){
+    sortLeaderboard() {       
         return this.leaderboard.sort((a, b) => b.score - a.score)
     }
 }

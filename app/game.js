@@ -19,6 +19,8 @@ export default class Game {
 
         let level = this.difficulty.getDifficulty() != 0 ? this.difficulty.getDifficulty() : 1;
 
+        this.doneListContainer = document.querySelector('.done-list');
+        this.doneList = [];
 
         this.difficulty.setDifficulty(level);
         this.launchRound();
@@ -37,37 +39,48 @@ export default class Game {
         }, 300);
     }
 
+    renderDoneList() {
+        this.doneListContainer.textContent = this.doneList.join(', ');
+    };
+
     handleKeyEvent(event) {
-        if(this.life > 0){
-            if (!this.currentWord.includes(event.key)) {
-                console.log('faux', this.life);
-                this.life -= 1;
-                console.log(this.life);
-
-                this.updateImage();
-
-                if(this.life == 0){
-                    console.log('fin');
-                    this.loseRound();
-                }
-
-                // Stocker la lettre quelque part
-
-                return;
-            }
-
-            for (let index = 0; index < this.currentWord.length; index++) {
-                if (this.currentWord[index] === event.key) {
-                    this.wordArray[index] = event.key;
-                }
-            }
-
-            if (!this.wordArray.includes('_')) {
-                return this.finishRound()
-            }
-
-            this.renderArray(this.wordArray);
+        if (this.life < 0) {
+            return;
         }
+
+        if (this.doneList.includes(event.key)) {
+            return;
+        }
+
+        if (!this.currentWord.includes(event.key)) {
+            this.life -= 1;
+
+            this.updateImage();
+
+            if(this.life == 0){
+                this.loseRound();
+            }
+            
+            if (!this.doneList.includes(event.key)) {
+                this.doneList.push(event.key);
+            }
+
+            this.renderDoneList();
+
+            return;
+        }
+
+        for (let index = 0; index < this.currentWord.length; index++) {
+            if (this.currentWord[index] === event.key) {
+                this.wordArray[index] = event.key;
+            }
+        }
+
+        if (!this.wordArray.includes('_')) {
+            return this.finishRound()
+        }
+
+        this.renderArray(this.wordArray);
     }
 
     renderArray(wordArray) {
@@ -95,13 +108,15 @@ export default class Game {
     launchRound() {
         let level = this.difficulty.getDifficulty();
         this.currentWord = this.provider.getWordWithMaxLength(level);
+        console.log(this.currentWord);
         this.wordArray = new Array(this.currentWord.length).fill('_');
-        console.log(this.currentWord, this.wordArray)
         this.renderArray(this.wordArray);
         
         this.life = 11;
         this.updateImage();
 
+        this.doneList = [];
+        this.renderDoneList();
     }
 
     finishRound() {
@@ -175,8 +190,7 @@ export default class Game {
             'start',
         ];
 
-        let imageContent = document.getElementById('imagePendu')
-        console.log(this.life, lifeArray[this.life]);
+        let imageContent = document.getElementById('imagePendu')    
         imageContent.src = 'assets/' + lifeArray[this.life] + '.png';
     }
 }

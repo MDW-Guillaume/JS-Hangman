@@ -1,6 +1,7 @@
 *{
     font-family: 'Comfortaa', cursive;
     font-size: 16px;
+    margin: 0;
 }
 
 body {
@@ -78,6 +79,7 @@ h1{
 .leaderboard h3{
     text-decoration: underline;
     text-underline-offset: 5px;
+    margin-bottom: 20px;
 }
 
 .leaderboard h3::after {
@@ -125,4 +127,12 @@ table, thead,  th, td {
 
 #losePopup .losePopup-container button{
     cursor: pointer;
+}
+
+.done-list {
+    height: 90px;
+    display: flex;
+    font-size: 30px;
+    justify-content: center;
+    align-items: center;
 }

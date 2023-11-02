@@ -4,12 +4,10 @@ export default class Provider{
     getOneWord(level = null) {
         let word;
 
-        if(!level){
+        if (!level){
             word = basicWords[Math.floor((Math.random() * basicWords.length) + 1)];
-            // console.log(word);
-        }else{
+        } else {
             word = basicWords[Math.floor((Math.random() * basicWords.length) + 1)];
-            // console.log(word)
         }
         
         return word;
