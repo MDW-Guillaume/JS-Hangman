@@ -3,6 +3,10 @@
     font-size: 16px;
 }
 
+body {
+    position: relative;
+}
+
 .container{
     text-align: center;
 }
@@ -95,4 +99,30 @@ table, thead,  th, td {
 
 .pendu-img{
     height: 250px;
+}
+
+#losePopup{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    background-color: #00000065;
+    
+    /* Quand la popup est affichée */
+    justify-content: center;
+    align-items: center;
+}
+
+#losePopup .losePopup-container{
+    width : 250px;
+    background-color: #fff;
+    padding : 20px;
+}
+
+#losePopup .losePopup-container button{
+    cursor: pointer;
 }

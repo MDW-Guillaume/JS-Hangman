@@ -38,34 +38,36 @@ export default class Game {
     }
 
     handleKeyEvent(event) {
-        if (!this.currentWord.includes(event.key)) {
-            console.log('faux', this.life);
-            this.life -= 1;
-            console.log(this.life);
+        if(this.life > 0){
+            if (!this.currentWord.includes(event.key)) {
+                console.log('faux', this.life);
+                this.life -= 1;
+                console.log(this.life);
 
-            this.updateImage();
+                this.updateImage();
 
-            if(this.life == 0){
-                console.log('fin');
-                this.loseRound();
+                if(this.life == 0){
+                    console.log('fin');
+                    this.loseRound();
+                }
+
+                // Stocker la lettre quelque part
+
+                return;
             }
 
-            // Stocker la lettre quelque part
-
-            return;
-        }
-
-        for (let index = 0; index < this.currentWord.length; index++) {
-            if (this.currentWord[index] === event.key) {
-                this.wordArray[index] = event.key;
+            for (let index = 0; index < this.currentWord.length; index++) {
+                if (this.currentWord[index] === event.key) {
+                    this.wordArray[index] = event.key;
+                }
             }
-        }
 
-        if (!this.wordArray.includes('_')) {
-            return this.finishRound()
-        }
+            if (!this.wordArray.includes('_')) {
+                return this.finishRound()
+            }
 
-        this.renderArray(this.wordArray);
+            this.renderArray(this.wordArray);
+        }
     }
 
     renderArray(wordArray) {
@@ -107,14 +109,20 @@ export default class Game {
 
         this.leaderboard.addScore(this.scoreSystem.getScore(), this.getCurrentPlayer());
 
-        this.leaderboard.renderLeaderboard()
+        this.leaderboard.renderLeaderboard();
 
         this.launchRound();
     }
 
     loseRound(){
-        alert('Pendu !');
-        this.launchRound();
+        let losePopup = document.getElementById('losePopup');
+        losePopup.style.display = 'flex';
+
+        let restartBtn = losePopup.querySelector('#restartBtn');
+        restartBtn.addEventListener('click', () => {
+            losePopup.style.display = 'none';
+            this.launchRound();
+        })
     }
 
     getCurrentPlayer() {
